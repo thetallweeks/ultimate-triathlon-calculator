@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+    Remove this if you use the .htaccess -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>A Triathlete's Pace Calculator</title>
+    <meta name="description" content="" />
+    <meta name="author" content="Kevin Weeks" />
+
+    <meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+    <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/hash-change.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <div>
+        <h1>Pace Calculator</h1>
+        <nav id="tabs">
+          <a id="swimTab" href="#swim">Swim</a>
+          <a id="bikeTab" href="#bike">Bike</a>
+          <a id="runTab" href="#run">Run</a>
+        </nav>
+      </div>
+    </header>
+    <div id="calculator-wrapper">
+      
+      <section id="swim" class="tab">
+        <form id="calculateSwimPace">
+          <input class="paceMinutes" type="number" placeholder="Minutes" class="keyup">
+          <input class="paceSeconds" type="number" placeholder="Seconds" class="keyup">
+          <select class="pace">
+            <option>Per 100 Yards</option>
+            <option>Per 100 Meters</option>
+          </select>
+          <div class="clear"></div>
+          <section class="time-section">
+            <h3>Time</h3>
+            <input class="hours" type="number" placeholder="Hours" class="keyup"></input>
+            <input class="minutes" type="number" placeholder="Minutes" class="keyup"></input>
+            <input class="seconds" type="number" placeholder="Seconds" class="keyup"></input>
+            <div class="timeTotal"></div>
+          </section>
+          <section class="distance-section">
+            <h3>Distance</h3>
+            <input class="distance" type="number" placeholder="Distance" class="keyup"></input>
+            <select class="units">
+              <option>Meters</option>
+              <option>Yards</option>
+            </select>
+          </section>
+          <input type="reset"></input>
+          <a class="calculate">Calculate</a>
+        </form>
+      </section>
+
+      <section id="bike" class="tab">
+        <form id="calculateBikePace">
+          <input class="pace" type="text" value="" class="keyup">
+          <label class="speedText">Distance/Time</label>
+          <div class="clear"></div>
+          <section class="time-section">
+            <h3>Time</h3>
+            <input class="hours" type="number" placeholder="Hours" class="keyup"></input>
+            <input class="minutes" type="number" placeholder="Minutes" class="keyup"></input>
+            <input class="seconds" type="number" placeholder="Seconds" class="keyup"></input>
+            <div class="timeTotal"></div>
+          </section>
+          <section class="distance-section">
+            <h3>Distance</h3>
+            <input class="distance" type="number" placeholder="Distance" class="keyup"></input>
+            <select class="units">
+              <option>Miles</option>
+              <option>Kilometers</option>
+            </select>
+          </section>
+          <input type="reset"></input>
+          <a class="calculate">Calculate</a>
+        </form>
+      </section>
+
+      <section id="run" class="tab">
+        <form id="calculateRunPace">
+          <input class="pace" type="text" value="" class="keyup">
+          <label class="speedText">Time/Distance</label>
+          <div class="clear"></div>
+          <section class="time-section">
+            <h3>Time</h3>
+            <input class="hours" type="number" placeholder="Hours" class="keyup"></input>
+            <input class="minutes" type="number" placeholder="Minutes" class="keyup"></input>
+            <input class="seconds" type="number" placeholder="Seconds" class="keyup"></input>
+            <div class="timeTotal"></div>
+          </section>
+          <section class="distance-section">
+            <h3>Distance</h3>
+            <input class="distance" type="number" placeholder="Distance" class="keyup"></input>
+            <select class="units">
+              <option>Miles</option>
+              <option>Kilometers</option>
+              <option>5K</option>
+              <option>10K</option>
+              <option>Half Marathon</option>
+              <option>Marathon</option>
+            </select>
+          </section>
+          <input type="reset"></input>
+          <a class="calculate">Calculate</a>
+        </form>
+      </section>
+
+      <footer>
+      </footer>
+    </div>
+  </body>
+</html>
