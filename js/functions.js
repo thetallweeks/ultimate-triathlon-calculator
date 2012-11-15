@@ -8,34 +8,33 @@
   $(function() {
     
     // Select All text inside number inputs
-    $("input[type=number]").click(function() {
+    $("input[type=tel]").click(function() {
        $(this).select();
     });
 
     // Tabs UI
     $(window).hashchange( function(){
-
       var hash = location.hash;
       // Iterate over all nav links, setting the "selected" class as-appropriate.
       $('nav#tabs a').each(function(){
-        var $this = $(this);
-        $this[ $this.attr('href') === hash ? 'addClass' : 'removeClass' ]( 'selected' );
-      
-        $('section.tab').hide();
+        if(hash != '#bike' || hash != '#run') {
+          $('a#swimTab').addClass('selected');
+        };
 
+        $('section.tab').addClass('hide');
+
+      // Removes hide class on selected tab   
       if(hash === '#bike') {
-        $('section#bike').show();
+        $('section#bike').removeClass('hide');
       } else if(hash === '#run') {
-        $('section#run').show();
+        $('section#run').removeClass('hide');
       } else {
-        $('section#swim').show();
+        $('section#swim').removeClass('hide');
       }
 
       });
     })
     $(window).hashchange();
-
-
 
     var flag = 0;
 
