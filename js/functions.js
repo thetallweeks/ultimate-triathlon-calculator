@@ -17,8 +17,18 @@
       var hash = location.hash;
       // Iterate over all nav links, setting the "selected" class as-appropriate.
       $('nav#tabs a').each(function(){
-        if(hash != '#bike' || hash != '#run') {
+        if(hash === '#bike') {
+          $('a#bikeTab').addClass('selected');
+          $('a#swimTab').removeClass('selected');
+          $('a#runTab').removeClass('selected');
+        } else if(hash === '#run') {
+          $('a#runTab').addClass('selected');
+          $('a#swimTab').removeClass('selected');
+          $('a#bikeTab').removeClass('selected');
+        } else {
           $('a#swimTab').addClass('selected');
+          $('a#bikeTab').removeClass('selected');
+          $('a#runTab').removeClass('selected');
         };
 
         $('section.tab').addClass('hide');
