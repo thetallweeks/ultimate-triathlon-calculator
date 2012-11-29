@@ -1,9 +1,5 @@
 (function() {
 
-  function calculate(form, id) {
-    
-  }
-
   // jQuery document ready
   $(function() {
     
@@ -13,9 +9,10 @@
     });
 
     // Tabs UI
-    $(window).hashchange( function(){
+    $(window).hashchange(function(){
       var hash = location.hash;
-      // Iterate over all nav links, setting the "selected" class as-appropriate.
+
+      // Adds Selected class to proper icon
       $('nav#tabs a').each(function(){
         if(hash === '#bike') {
           $('a#bikeTab').addClass('selected');
@@ -29,9 +26,9 @@
           $('a#swimTab').addClass('selected');
           $('a#bikeTab').removeClass('selected');
           $('a#runTab').removeClass('selected');
-        };
+        }
 
-        $('section.tab').addClass('hide');
+      $('section.tab').addClass('hide');
 
       // Removes hide class on selected tab   
       if(hash === '#bike') {
@@ -43,110 +40,52 @@
       }
 
       });
-    })
+    });
     $(window).hashchange();
-
-    var flag = 0;
 
     // Calculate Pace
     $('.calculate').click(function() {
-      calculate("form", "id");
       var hours = $('.hours').val();
       var minutes = $('.minutes').val();
       var seconds = $('.seconds').val();
-      var distance = parseFloat(($('.distance').val() == "") ? (0) : ($('.distance').val()));
-      var pace = parseInt(($('.pace').val() == "") ? (0) : ($('.pace').val()));
+      var distance = parseFloat(($('.distance').val() === "") ? (0) : ($('.distance').val()));
+      var pace = parseInt(($('.pace').val() === "") ? (0) : ($('.pace').val()));
+      if(hours === '' && minutes === '' && seconds === '') {
+        if(distance > 0 && pace > 0) {
+          seconds = (distance / (pace / 3600));
+          var tm = new Date(seconds * 1000);
+          hours = tm.getUTCHours();
+          minutes = tm.getUTCMinutes();
+          seconds = tm.getUTCSeconds();
 
-
-      switch(flag) {
-        case 0:
-          if(hours == '' && minutes == '' && seconds == '') {
-            if(distance > 0 && pace > 0) {
-              seconds = (distance / (pace / 3600));
-              var tm = new Date(seconds * 1000);
-              hours = tm.getUTCHours();
-              minutes = tm.getUTCMinutes();
-              seconds = tm.getUTCSeconds();
-
-              $('.hours').val(hours);
-              $('.minutes').val(minutes);
-              $('.seconds').val(seconds);
-              flag = 1;
-            }
-          } else if(!distance) {
-              hours = parseInt((hours == "") ? (0) : (hours));
-              minutes = parseInt((minutes == "") ? (0) : (minutes));
-              seconds = parseInt((seconds == "") ? (0) : (seconds));
-
-              seconds += (hours * 3600) + (minutes * 60);
-              
-              if(seconds > 0 && pace > 0) {
-                distance = pace * (seconds / 3600).toFixed(2);
-                $('.distance').val(distance);
-                flag = 2;
-              }
-
-            } else if(!pace) {
-              hours = parseInt((hours == "") ? (0) : (hours));
-              minutes = parseInt((minutes == "") ? (0) : (minutes));
-              seconds = parseInt((seconds == "") ? (0) : (seconds));
-
-              seconds += (hours * 3600) + (minutes * 60);
-              if(seconds > 0 && distance > 0) {
-                pace = (distance / (seconds / 3600)).toFixed(2);
-                $('.pace').val(pace);
-                flag = 3;
-              }
-            }
-          break;
-
-        case 1:
-          if(distance > 0 && pace > 0) {
-            seconds = (distance / (pace / 3600));
-            var tm = new Date(seconds * 1000);
-            hours = tm.getUTCHours();
-            minutes = tm.getUTCMinutes();
-            seconds = tm.getUTCSeconds();
-
-            $('.hours').val(hours);
-            $('.minutes').val(minutes);
-            $('.seconds').val(seconds); 
-          } else {
-            flag = 0;
-          }
-          break;
-
-        case 2:
-          hours = parseInt((hours == "") ? (0) : (hours));
-          minutes = parseInt((minutes == "") ? (0) : (minutes));
-          seconds = parseInt((seconds == "") ? (0) : (seconds));
+          $('.hours').val(hours);
+          $('.minutes').val(minutes);
+          $('.seconds').val(seconds);
+        }
+      } else if(!distance) {
+          hours = parseInt((hours === "") ? (0) : (hours));
+          minutes = parseInt((minutes === "") ? (0) : (minutes));
+          seconds = parseInt((seconds === "") ? (0) : (seconds));
 
           seconds += (hours * 3600) + (minutes * 60);
           
           if(seconds > 0 && pace > 0) {
             distance = pace * (seconds / 3600).toFixed(2);
             $('.distance').val(distance);
-          } else {
-            flag = 0;
           }
-          break;
 
-        case 3:
-          hours = parseInt((hours == "") ? (0) : (hours));
-          minutes = parseInt((minutes == "") ? (0) : (minutes));
-          seconds = parseInt((seconds == "") ? (0) : (seconds));
+        } else if(!pace) {
+          hours = parseInt((hours === "") ? (0) : (hours));
+          minutes = parseInt((minutes === "") ? (0) : (minutes));
+          seconds = parseInt((seconds === "") ? (0) : (seconds));
 
           seconds += (hours * 3600) + (minutes * 60);
           if(seconds > 0 && distance > 0) {
             pace = (distance / (seconds / 3600)).toFixed(2);
             $('.pace').val(pace);
-          } else {
-            flag = 0;
           }
-          break;
-      }
-  
-      return false;
+        }
+
     });
     
   });
