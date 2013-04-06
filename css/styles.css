@@ -1,1 +1,55 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}.clear:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}@font-face{font-family:RobotoLight;src:url(../fonts/Roboto-Light.ttf);font-weight:300}@font-face{font-family:RobotoThin;src:url(../fonts/Roboto-Thin.ttf);font-weight:200}@font-face{font-family:RobotoCondensed;src:url(../fonts/Roboto-Condensed.ttf);font-weight:400}.sprite{background:url(../img/pace-calculator-sprite.png) no-repeat;display:block;font-size:0;line-height:0}.button{background:#f5f5f5;background:-webkit-gradient(linear,left bottom,left top,color-stop(0,#f1f1f1),color-stop(1,#f5f5f5));background:-ms-linear-gradient(bottom,#f1f1f1,#f5f5f5);background:-moz-linear-gradient(center bottom,#f1f1f1 0,#f5f5f5 100%);border:1px solid rgba(0,0,0,0.0976563);border-radius:2px;padding:3px}.orange{color:#ff571f}a.calculate{background-color:#ff571f;cursor:pointer;display:block;padding:10px;text-align:center;width:70%}.hide{display:none}body{background:url(../img/grid-bg.png);font-family:RobotoLight,Arial,sans-serif}header{background-color:#444;height:200px;width:100%}header>div{width:450px;margin:0 auto;overflow:hidden}header h1{background:url(../img/pace-calculator-sprite.png) no-repeat;display:block;font-size:0;line-height:0;background-position:0 -50px;height:100px;width:400px;margin:20px auto}header nav{height:50px;margin:0 auto;width:271px}header nav a{transition:opacity .1s ease-out;-moz-transition:opacity .1s ease-out;-webkit-transition:opacity .1s ease-out;float:left;height:50px;opacity:.5;width:50px}header nav a:hover{opacity:1.0}header a.selected{opacity:1.0}header nav #swimTab{background:url(../img/pace-calculator-sprite.png) no-repeat;display:block;font-size:0;line-height:0;background-position:0 0}header nav #bikeTab{background:url(../img/pace-calculator-sprite.png) no-repeat;display:block;font-size:0;line-height:0;background-position:-50px 0;margin-left:60.5px;margin-right:60.5px}header nav #runTab{background:url(../img/pace-calculator-sprite.png) no-repeat;display:block;font-size:0;line-height:0;background-position:-100px 0}#calculator-wrapper{width:400px;margin:0 auto;padding:25px;position:relative}h2{float:left;font-size:30px}h2 span.orange{font-weight:bold}h2 span#arrow{background:url(../img/pace-calculator-sprite.png) no-repeat;display:block;font-size:0;line-height:0;background-position:-300px 0;display:inline-block;height:15px;margin:8px 10px 0 4px;vertical-align:top;width:15px}#changeCalculation{background:#f5f5f5;background:-webkit-gradient(linear,left bottom,left top,color-stop(0,#f1f1f1),color-stop(1,#f5f5f5));background:-ms-linear-gradient(bottom,#f1f1f1,#f5f5f5);background:-moz-linear-gradient(center bottom,#f1f1f1 0,#f5f5f5 100%);border:1px solid rgba(0,0,0,0.0976563);border-radius:2px;padding:3px;float:left;height:17px;margin:3px 0 0 15px;width:18px}#changeCalculation a{background:url(../img/pace-calculator-sprite.png) no-repeat;display:block;font-size:0;line-height:0;background-position:-150px 0;height:17px;width:18px}form{margin-top:10px}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input,select{font-family:RobotoThin,Arial,sans-serif;font-size:20px;height:25px;margin-bottom:20px}input.pace{float:left;width:20%}label{font-size:15px;float:left;line-height:31px;margin-left:10px}input.hours,input.minutes,input.seconds,input.distance,input.paceMinutes,input.paceSeconds{width:20%;margin-right:8px}input.seconds{margin-right:0}select{background:transparent;height:30px}
+/* Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+.clear:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0; }
+
+body {
+  font-family: "Titillium Web", Tahoma, "Trebuchet MS", sans-serif;
+  font-weight: 400; }
+
+.sprite {
+  background: url(../img/pace-calculator-sprite.png) no-repeat;
+  display: block;
+  font-size: 0;
+  line-height: 0; }
+
+a {
+  cursor: pointer; }
+
+.selected {
+  color: red; }
+
+.hide {
+  display: none; }

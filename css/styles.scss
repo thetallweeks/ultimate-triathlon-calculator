@@ -1,0 +1,30 @@
+@import 'reset';
+
+.clear:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+body {
+    font-family: 'Titillium Web', Tahoma, 'Trebuchet MS', sans-serif;
+    font-weight: 400;
+}
+
+.sprite { 
+    background: url(../img/pace-calculator-sprite.png) no-repeat;
+    display: block;
+    font-size: 0;
+    line-height: 0;
+}
+
+a { cursor: pointer; }
+
+.selected {
+    color: red;
+}
+
+.hide { display: none; }

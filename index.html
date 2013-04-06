@@ -19,6 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script type="text/javascript" src="lib/hash-change.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
   </head>
 
@@ -36,13 +37,10 @@
     <div id="calculator-wrapper">
       
       <section id="swim" class="tab">
-        <!-- <form id="calculateSwim">
+        <form id="calculateSwim">
           <input class="paceMinutes" type="tel" placeholder="Minutes">
           <input class="paceSeconds" type="tel" placeholder="Seconds">
-          <select class="pace">
-            <option>Per 100 Yards</option>
-            <option>Per 100 Meters</option>
-          </select>
+          <label class="speedText">/100 Meters</label>
           <div class="clear"></div>
           <section class="time-section">
             <h3>Time</h3>
@@ -60,13 +58,13 @@
             </select>
           </section>
           <a class="calculate">Calculate</a>
-        </form> -->
+        </form>
       </section>
 
       <section id="bike" class="tab">
         <form id="calculateBike">
           <input class="pace" type="text" value="">
-          <label class="speedText">Distance/Time</label>
+          <label class="speedText">mph</label>
           <div class="clear"></div>
           <section class="time-section">
             <h3>Time</h3>
@@ -88,9 +86,10 @@
       </section>
 
       <section id="run" class="tab">
-        <!-- <form id="calculateRun">
-          <input class="pace" type="text" value="">
-          <label class="speedText">Time/Distance</label>
+        <form id="calculateRun">
+          <input class="paceMinutes" type="text" value="">
+          <input class="paceSeconds" type="text" value="">
+          <label class="speedText">Minutes/Mile</label>
           <div class="clear"></div>
           <section class="time-section">
             <h3>Time</h3>
@@ -112,9 +111,9 @@
             </select>
           </section>
           <a class="calculate">Calculate</a>
-        </form> -->
-      </section>
-
+        </form>
+      </section> 
+ 
       <footer>
       </footer>
     </div>
