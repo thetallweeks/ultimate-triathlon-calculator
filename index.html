@@ -16,9 +16,6 @@
     <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-    <script type="text/javascript" src="lib/hash-change.js"></script>
-    <script type="text/javascript" src="js/functions.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:300,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
   </head>
@@ -28,9 +25,9 @@
       <div>
         <h1>Pace Calculator</h1>
         <nav id="tabs">
-          <a id="swimTab" href="#swim">Swim</a>
-          <a id="bikeTab" href="#bike">Bike</a>
-          <a id="runTab" href="#run">Run</a>
+          <a id="swimTab" href="#swim" data-toggle="tab">Swim</a>
+          <a id="bikeTab" href="#bike" data-toggle="tab">Bike</a>
+          <a id="runTab" href="#run" data-toggle="tab">Run</a>
         </nav>
       </div>
     </header>
@@ -38,10 +35,11 @@
       
       <section id="swim" class="tab">
         <form id="calculateSwim">
-          <input class="paceMinutes" type="tel" placeholder="Minutes">
-          <input class="paceSeconds" type="tel" placeholder="Seconds">
-          <label class="speedText">/100 Meters</label>
-          <div class="clear"></div>
+          <section class="pace-section">
+            <input class="paceMinutes" type="tel" placeholder="Minutes">
+            <input class="paceSeconds" type="tel" placeholder="Seconds">
+            <label class="speedText">/100 Meters</label>
+          </section>
           <section class="time-section">
             <h3>Time</h3>
             <input class="hours" type="tel" placeholder="Hours"></input>
@@ -63,9 +61,10 @@
 
       <section id="bike" class="tab">
         <form id="calculateBike">
-          <input class="pace" type="text" value="">
-          <label class="speedText">mph</label>
-          <div class="clear"></div>
+          <section class="time-section">
+            <input class="pace" type="text" value="">
+            <label class="speedText">mph</label>
+          </section>
           <section class="time-section">
             <h3>Time</h3>
             <input class="hours" type="tel" placeholder="Hours"></input>
@@ -87,10 +86,11 @@
 
       <section id="run" class="tab">
         <form id="calculateRun">
-          <input class="paceMinutes" type="text" value="">
-          <input class="paceSeconds" type="text" value="">
-          <label class="speedText">Minutes/Mile</label>
-          <div class="clear"></div>
+          <section class="time-section">
+            <input class="paceMinutes" type="text" value="">
+            <input class="paceSeconds" type="text" value="">
+            <label class="speedText">Minutes/Mile</label>
+          </section>
           <section class="time-section">
             <h3>Time</h3>
             <input class="hours" type="tel" placeholder="Hours"></input>
@@ -117,5 +117,10 @@
       <footer>
       </footer>
     </div>
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="lib/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="lib/hash-change.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
   </body>
 </html>

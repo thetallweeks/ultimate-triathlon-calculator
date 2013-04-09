@@ -1,14 +1,21 @@
-(function() {
+(function($) {
 
   // jQuery document ready
   $(function() {
-    
+
     // Select All text inside number inputs
     $("input[type=tel]").click(function() {
        $(this).select();
     });
 
+    // this create variables to reduce the number of times needed to fetch
+    // these ids from the DOM
+    var $swim = $('#swim');
+    var $bike = $('#bike');
+    var $run = $('#run');
+
     // Default state to swim in case there is no hash
+    // This has to be called outside the hashchange function
     var state = 'swim';
 
     // Tabs UI
@@ -41,31 +48,39 @@
     }); // END hashchange function
     $(window).hashchange();
 
-    // Change pace text based on distance selection
-    if (state === 'swim') {
-      $('#' + state).find('.units').change(function() {
-        $('#' + state).find('.speedText').text('/100 ' + $('#' + state).find('.units').val());
-      });
-    } else if (state ===  'bike') {
-      $('#' + state).find('.units').change(function() {
-        if($('#' + state).find('.units').val() === 'Kilometers') {
-          $('#' + state).find('.speedText').text('kph');
+    // The change function needs to go before the check for state to bind the event
+    // Then I can use the state variable because the hashchange has already occurred
+    $('.units').change(function() {
+      if (state === 'swim') {
+        $swim.find('.speedText').text('/100 ' + $swim.find('.units').val());
+      } else if (state ===  'bike') {
+        if ($bike.find('.units').val() === 'Kilometers') {
+          $bike.find('.speedText').text('kph');
         } else {
-          $('#' + state).find('.speedText').text('mph');
+          $bike.find('.speedText').text('mph');
         }
-      });
-    } else if(state === 'run') {
-      $('#' + state).find('.units').change(function() {
-        if($('#' + state).find('.units').val() === 'Kilometers') {
-          $('#' + state).find('.speedText').text('Min/Kilometer');
+      } else if (state === 'run') {
+        
+        if ($run.find('.units').val() === 'Kilometers') {
+          $run.find('.speedText').text('Min/Kilometer');
         } else {
-          $('#' + state).find('.speedText').text('Min/Mile');
-        }
-      });
-    }
+          $run.find('.speedText').text('Min/Mile');
+        } 
+
+        if ($run.find('.units').val() === '5K') {
+          $run.find('.distance').val(3.1);
+        } else if ($run.find('.units').val() === '10K') {
+          $run.find('.distance').val(6.2);
+        } else if ($run.find('.units').val() === 'Half Marathon') {
+          $run.find('.distance').val(13.1);
+        } else if ($run.find('.units').val() === 'Marathon') {
+          $run.find('.distance').val(26.2);
+        }   
+      }
+    });
 
     // Calculate function
-    $('#' + state).find('.calculate').click(function() {
+    $('.calculate').click(function() {
       var hours = $('#' + state).find('.hours').val();
       var minutes = $('#' + state).find('.minutes').val();
       var seconds = $('#' + state).find('.seconds').val();
@@ -97,6 +112,7 @@
           seconds = Math.floor(timeInSeconds - (hours * 3600) - (minutes * 60));
 
           // Prints values for hours, minutes, and seconds
+
           $('#' + state).find('.hours').val(hours);
           $('#' + state).find('.minutes').val(minutes);
           $('#' + state).find('.seconds').val(seconds);
@@ -137,7 +153,12 @@
           timeInSeconds = (hours * 3600) + (minutes * 60) + seconds;
           if(timeInSeconds > 0 && distance > 0) {
             if (state === 'swim' || state === 'run') {
-              paceInSeconds = ((timeInSeconds * 100) / distance);
+              if (state === 'swim') {
+                paceInSeconds = ((timeInSeconds * 100) / distance);
+              } else if (state === 'run') {
+                paceInSeconds = timeInSeconds / distance;
+              }
+              
               paceMinutes = Math.floor(paceInSeconds / 60);
               paceSeconds = Math.round(paceInSeconds % 60);
               $('#' + state).find('.paceMinutes').val(paceMinutes);
