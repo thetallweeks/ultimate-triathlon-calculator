@@ -36,16 +36,17 @@
       <section id="swim" class="tab">
         <form id="calculateSwim">
           <section class="pace-section">
-            <input class="paceMinutes" type="tel" placeholder="Minutes">
-            <input class="paceSeconds" type="tel" placeholder="Seconds">
+            <input class="paceMinutes" type="tel" placeholder="Minutes" maxlength="2">
+            <input class="paceSeconds" type="tel" placeholder="Seconds" maxlength="2">
             <label class="speedText">/100 Meters</label>
+            <div class="clearRow">clear row</div>
           </section>
           <section class="time-section">
             <h3>Time</h3>
             <input class="hours" type="tel" placeholder="Hours"></input>
-            <input class="minutes" type="tel" placeholder="Minutes"></input>
-            <input class="seconds" type="tel" placeholder="Seconds"></input>
-            <div class="timeTotal"></div>
+            <input class="minutes" type="tel" placeholder="Minutes" maxlength="2"></input>
+            <input class="seconds" type="tel" placeholder="Seconds" maxlength="2"></input>
+            <div class="clearRow">clear row</div>
           </section>
           <section class="distance-section">
             <h3>Distance</h3>
@@ -54,6 +55,7 @@
               <option>Meters</option>
               <option>Yards</option>
             </select>
+            <div class="clearRow">clear row</div>
           </section>
           <a class="calculate">Calculate</a>
         </form>
@@ -64,13 +66,14 @@
           <section class="time-section">
             <input class="pace" type="text" value="">
             <label class="speedText">mph</label>
+            <div class="clearRow">clear row</div>
           </section>
           <section class="time-section">
             <h3>Time</h3>
             <input class="hours" type="tel" placeholder="Hours"></input>
-            <input class="minutes" type="tel" placeholder="Minutes"></input>
-            <input class="seconds" type="tel" placeholder="Seconds"></input>
-            <div class="timeTotal"></div>
+            <input class="minutes" type="tel" placeholder="Minutes" maxlength="2"></input>
+            <input class="seconds" type="tel" placeholder="Seconds" maxlength="2"></input>
+            <div class="clearRow">clear row</div>
           </section>
           <section class="distance-section">
             <h3>Distance</h3>
@@ -79,6 +82,7 @@
               <option>Miles</option>
               <option>Kilometers</option>
             </select>
+            <div class="clearRow">clear row</div>
           </section>
           <a class="calculate">Calculate</a>
         </form>
@@ -87,16 +91,17 @@
       <section id="run" class="tab">
         <form id="calculateRun">
           <section class="time-section">
-            <input class="paceMinutes" type="text" value="">
-            <input class="paceSeconds" type="text" value="">
+            <input class="paceMinutes" type="text" placeholder="Minutes" maxlength="2">
+            <input class="paceSeconds" type="text" placeholder="Seconds" maxlength="2">
             <label class="speedText">Minutes/Mile</label>
+            <div class="clearRow">clear row</div>
           </section>
           <section class="time-section">
             <h3>Time</h3>
             <input class="hours" type="tel" placeholder="Hours"></input>
-            <input class="minutes" type="tel" placeholder="Minutes"></input>
-            <input class="seconds" type="tel" placeholder="Seconds"></input>
-            <div class="timeTotal"></div>
+            <input class="minutes" type="tel" placeholder="Minutes" maxlength="2"></input>
+            <input class="seconds" type="tel" placeholder="Seconds" maxlength="2"></input>
+            <div class="clearRow">clear row</div>
           </section>
           <section class="distance-section">
             <h3>Distance</h3>
@@ -109,6 +114,7 @@
               <option>Half Marathon</option>
               <option>Marathon</option>
             </select>
+            <div class="clearRow">clear row</div>
           </section>
           <a class="calculate">Calculate</a>
         </form>

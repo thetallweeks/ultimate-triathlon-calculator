@@ -79,6 +79,14 @@
       }
     });
 
+    // Clear row
+    var $clearRow = $('.clearRow');
+    // Create a variable of the jquery object when possible
+    // this minimizes the amount of times you access the DOM (slower)
+    $clearRow.click(function() {
+      $clearRow.siblings().val("");
+    });
+
     // Calculate function
     $('.calculate').click(function() {
       var hours = $('#' + state).find('.hours').val();
