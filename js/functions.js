@@ -4,7 +4,7 @@
   $(function() {
 
     // Select All text inside number inputs
-    $("input[type=tel]").click(function() {
+    $('input[type=tel]').click(function() {
        $(this).select();
     });
 
@@ -48,6 +48,42 @@
     }); // END hashchange function
     $(window).hashchange();
 
+    // Enable Input
+    $.fn.enableInput = function() {
+      return this.each(function() {
+      var $this = $(this);
+      $this.siblings('input').prop('disabled', false);
+      });
+    };
+
+    // Disable input
+    $.fn.disableInput = function() {
+      return this.each(function() {
+        var $this = $(this);
+        $this.siblings('input').prop('disabled', true);
+      });
+    };
+
+    // add the disabled class and disable inputs
+    $.fn.addDisable = function() {
+      return this.each(function() {
+        var $this = $(this);
+        $this.addClass('disabled');
+        $this.find('input').prop('disabled', true);
+      });
+    };
+
+    // remove the disabled class because it will get added
+    $.fn.removeDisable = function() {
+      return this.each(function() {
+        var $this = $(this);
+        $this.removeClass('disabled');
+        $this.find('input').prop('disabled', false);
+      });
+    };
+
+    var standardDistance = false;
+
     // The change function needs to go before the check for state to bind the event
     // Then I can use the state variable because the hashchange has already occurred
     $('.units').change(function() {
@@ -60,25 +96,32 @@
           $bike.find('.speedText').text('mph');
         }
       } else if (state === 'run') {
-        
+        if ($run.find('.units').val() === 'Kilometers' || $run.find('.units').val() === 'Miles') {
+          $(this).enableInput();
+          $(this).parent().removeClass('ready');
+          standardDistance = false;
+        } else {
+          $(this).disableInput();
+          $(this).siblings('input').val('');
+          $(this).parent().addClass('ready');
+        }
+
         if ($run.find('.units').val() === 'Kilometers') {
           $run.find('.speedText').text('Min/Kilometer');
         } else {
           $run.find('.speedText').text('Min/Mile');
+          if ($run.find('.units').val() === '5K') {
+            standardDistance = 3.1;
+          } else if ($run.find('.units').val() === '10K') {
+            standardDistance = 6.2
+          } else if ($run.find('.units').val() === 'Half Marathon') {
+            standardDistance = 13.1;
+          } else if ($run.find('.units').val() === 'Marathon') {
+            standardDistance = 26.2;
+          }   
         } 
-
-        if ($run.find('.units').val() === '5K') {
-          $run.find('.distance').val(3.1);
-        } else if ($run.find('.units').val() === '10K') {
-          $run.find('.distance').val(6.2);
-        } else if ($run.find('.units').val() === 'Half Marathon') {
-          $run.find('.distance').val(13.1);
-        } else if ($run.find('.units').val() === 'Marathon') {
-          $run.find('.distance').val(26.2);
-        }   
       }
     });
-
 
     // Add 'ready' class if any inputs in row are valid
     $('input').keyup(function() {
@@ -87,7 +130,7 @@
       // so I can evaluate all inputs at the same time
       $inputs = $(this).add($(this).siblings('input'));
       $parent = $inputs.parent();
-      if ($inputs.val() !== "" && $inputs.val() > 0) {
+      if ($inputs.val() !== '' && $inputs.val() > 0) {
         $parent.addClass('ready');
       } else {
         $parent.removeClass('ready');
@@ -98,36 +141,23 @@
       $timeRow = $('#' + state).find('.time-section');
       $distanceRow = $('#' + state).find('.distance-section');
 
-      // remove the disabled class because it will get added
-      removeDisabled = function(rowName) {
-        rowName.removeClass('disabled');
-        rowName.find('input').prop('disabled', false);
-      }
-
-      removeDisabled($paceRow);
-      removeDisabled($timeRow);
-      removeDisabled($distanceRow);
-      
-      $paceRow.removeClass('disabled');
-      $timeRow.removeClass('disabled');
-      $distanceRow.removeClass('disabled');
+      $paceRow.removeDisable();
+      $timeRow.removeDisable();
+      $distanceRow.removeDisable();
 
       if ($paceRow.hasClass('ready') && $timeRow.hasClass('ready')) {
-        $distanceRow.addClass('disabled');
-        $distanceRow.find('input').prop('disabled', true);
+        $distanceRow.addDisable();
       } else if ($paceRow.hasClass('ready') && $distanceRow.hasClass('ready')) {
-        $timeRow.addClass('disabled');
-        $timeRow.find('input').prop('disabled', true);
+        $timeRow.addDisable();
       } else if ($timeRow.hasClass('ready') && $distanceRow.hasClass('ready')) {
-        $paceRow.addClass('disabled');
-        $paceRow.find('input').prop('disabled', true);
+        $paceRow.addDisable();
       }
 
     });
 
     // Clear row
     $('.clearRow').click(function() {
-      $(this).siblings().val("");
+      $(this).siblings().val('');
 
       // eq(0) gets first input
       // it is also a very fast way to select the first item
@@ -140,27 +170,37 @@
       var hours = $('#' + state).find('.hours').val();
       var minutes = $('#' + state).find('.minutes').val();
       var seconds = $('#' + state).find('.seconds').val();
-      // if then shorthand (if) ? (then this) : (else this)
-      var distance = parseFloat(($('#' + state).find('.distance').val() === "") ? (0) : ($('#' + state).find('.distance').val()));
+
+      // Checks if run distance is 
+      if (state === 'run' && standardDistance !== false) {
+        var distance = standardDistance;
+      } else {
+        // if then shorthand (if) ? (then this) : (else this)
+        var distance = parseFloat(($('#' + state).find('.distance').val() === '') ? (0) : ($('#' + state).find('.distance').val()));
+      }
+
+      console.log(distance);
 
       if (state === 'swim' || state === 'run') {
-        var paceMinutes = parseInt(($('#' + state).find('.paceMinutes').val() === "") ? (0) : ($('#' + state).find('.paceMinutes').val()));
-        var paceSeconds = parseInt(($('#' + state).find('.paceSeconds').val() === "") ? (0) : ($('#' + state).find('.paceSeconds').val()));
+        var paceMinutes = parseInt(($('#' + state).find('.paceMinutes').val() === '') ? (0) : ($('#' + state).find('.paceMinutes').val()));
+        var paceSeconds = parseInt(($('#' + state).find('.paceSeconds').val() === '') ? (0) : ($('#' + state).find('.paceSeconds').val()));
         var paceInSeconds = (paceMinutes * 60) + paceSeconds;
       } else if (state === 'bike') {
         // Pace = mph for biking (single value)
-        var pace = parseInt(($('#' + state).find('.pace').val() === "") ? (0) : ($('#' + state).find('.pace').val()));
+        var pace = parseInt(($('#' + state).find('.pace').val() === '') ? (0) : ($('#' + state).find('.pace').val()));
       }
 
       // Check to see if Time is empty
       if (hours === '' && minutes === '' && seconds === '') {
         // Check to see if distance and pace are greater than 0
-        if(distance > 0 && pace > 0 || paceInSeconds > 0) {
+        if (distance > 0 && pace > 0 || paceInSeconds > 0) {
           // If distance and pace > 0 calculates time
-          if (state === 'swim' || state === 'run') {
+          if (state === 'swim') {
             timeInSeconds = ((paceInSeconds * distance) / 100);
           } else if (state === 'bike') {
             timeInSeconds = (distance / pace) * 3600;
+          } else { // if state === 'run'
+            timeInSeconds = paceInSeconds * distance;
           }
 
           hours = Math.floor(timeInSeconds / 3600);
@@ -176,9 +216,9 @@
 
       // Check to see if distance is empty
       } else if(!distance) {
-          hours = parseInt((hours === "") ? (0) : (hours));
-          minutes = parseInt((minutes === "") ? (0) : (minutes));
-          seconds = parseInt((seconds === "") ? (0) : (seconds));
+          hours = parseInt((hours === '') ? (0) : (hours));
+          minutes = parseInt((minutes === '') ? (0) : (minutes));
+          seconds = parseInt((seconds === '') ? (0) : (seconds));
 
           // Converts hours, minuts, and seconds to seconds
           timeInSeconds = (hours * 3600) + (minutes * 60) + seconds;
@@ -188,30 +228,31 @@
 
             // Calculates distance
             if (state === 'swim' || state === 'run') {
-              
               paceInSeconds = (paceMinutes * 60) + paceSeconds;
               timeInSeconds = (hours * 3600) + (minutes * 60) + seconds;
               if (state === 'swim') {
                 distance = (timeInSeconds * 100 / paceInSeconds).toFixed(2);
-              } 
+              } else { // if state === 'run'
+                distance = (timeInSeconds / paceInSeconds).toFixed(2);
+              }
 
             } else if (state === 'bike') {
-              distance = pace * (timeInSeconds / 3600).toFixed(2);
+              distance = (pace * (timeInSeconds / 3600)).toFixed(2);
             }
             // Displays caluclated distance in distance field
             $('#' + state).find('.distance').val(distance);
           }
 
-        } else if(!pace) {
-          hours = parseInt((hours === "") ? (0) : (hours));
-          minutes = parseInt((minutes === "") ? (0) : (minutes));
-          seconds = parseInt((seconds === "") ? (0) : (seconds));
+        } else if (!pace) {
+          hours = parseInt((hours === '') ? (0) : (hours));
+          minutes = parseInt((minutes === '') ? (0) : (minutes));
+          seconds = parseInt((seconds === '') ? (0) : (seconds));
           timeInSeconds = (hours * 3600) + (minutes * 60) + seconds;
           if(timeInSeconds > 0 && distance > 0) {
             if (state === 'swim' || state === 'run') {
               if (state === 'swim') {
                 paceInSeconds = ((timeInSeconds * 100) / distance);
-              } else if (state === 'run') {
+              } else { // if state === 'run'
                 paceInSeconds = timeInSeconds / distance;
               }
               
