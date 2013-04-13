@@ -79,12 +79,60 @@
       }
     });
 
+
+    // Add 'ready' class if any inputs in row are valid
+    $('input').keyup(function() {
+      $inputs = $(this); 
+      // .add() adds siblings to jQuery object of current input
+      // so I can evaluate all inputs at the same time
+      $inputs = $(this).add($(this).siblings('input'));
+      $parent = $inputs.parent();
+      if ($inputs.val() !== "" && $inputs.val() > 0) {
+        $parent.addClass('ready');
+      } else {
+        $parent.removeClass('ready');
+      }
+
+      // Check if 2 of 3 parents have ready class
+      $paceRow = $('#' + state).find('.pace-section');
+      $timeRow = $('#' + state).find('.time-section');
+      $distanceRow = $('#' + state).find('.distance-section');
+
+      // remove the disabled class because it will get added
+      removeDisabled = function(rowName) {
+        rowName.removeClass('disabled');
+        rowName.find('input').prop('disabled', false);
+      }
+
+      removeDisabled($paceRow);
+      removeDisabled($timeRow);
+      removeDisabled($distanceRow);
+      
+      $paceRow.removeClass('disabled');
+      $timeRow.removeClass('disabled');
+      $distanceRow.removeClass('disabled');
+
+      if ($paceRow.hasClass('ready') && $timeRow.hasClass('ready')) {
+        $distanceRow.addClass('disabled');
+        $distanceRow.find('input').prop('disabled', true);
+      } else if ($paceRow.hasClass('ready') && $distanceRow.hasClass('ready')) {
+        $timeRow.addClass('disabled');
+        $timeRow.find('input').prop('disabled', true);
+      } else if ($timeRow.hasClass('ready') && $distanceRow.hasClass('ready')) {
+        $paceRow.addClass('disabled');
+        $paceRow.find('input').prop('disabled', true);
+      }
+
+    });
+
     // Clear row
-    var $clearRow = $('.clearRow');
-    // Create a variable of the jquery object when possible
-    // this minimizes the amount of times you access the DOM (slower)
-    $clearRow.click(function() {
-      $clearRow.siblings().val("");
+    $('.clearRow').click(function() {
+      $(this).siblings().val("");
+
+      // eq(0) gets first input
+      // it is also a very fast way to select the first item
+      $(this).siblings('input:eq(0)').keyup();
+      // .keyup() will run all keyup events on the item
     });
 
     // Calculate function
