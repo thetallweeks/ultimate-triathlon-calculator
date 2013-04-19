@@ -16,46 +16,67 @@
     <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:300,400|Oswald:700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
   </head>
 
   <body>
-    <header>
-      <div>
-        <h1>Pace Calculator</h1>
-        <nav id="tabs">
-          <a id="swimTab" href="#swim" data-toggle="tab">Swim</a>
-          <a id="bikeTab" href="#bike" data-toggle="tab">Bike</a>
-          <a id="runTab" href="#run" data-toggle="tab">Run</a>
-        </nav>
-      </div>
-    </header>
+    
     <div id="calculator-wrapper">
-      
+      <header>
+        <h1><img src="img/logo.png" alt="The Ultimate Tri Calculator" /></h1>
+        <nav id="tabs">
+          <a href="#swim" id="swimTab">
+            <span aria-hidden="true" data-icon="s"></span>
+            <span class="screen-reader-text">Swim</span>
+          </a>
+          <a href="#bike" id="bikeTab">
+            <span aria-hidden="true" data-icon="b"></span>
+            <span class="screen-reader-text">Bike</span>
+          </a>
+          <a href="#run" id="runTab">
+            <span aria-hidden="true" data-icon="r"></span>
+            <span class="screen-reader-text">Run</span>
+          </a>
+        </nav>
+      </header>
+
       <section id="swim" class="tab">
         <form id="calculateSwim">
-          <section class="pace-section">
-            <input class="paceMinutes" type="tel" placeholder="Minutes" maxlength="2">
-            <input class="paceSeconds" type="tel" placeholder="Seconds" maxlength="2">
+          <section class="pace-section row">
+            <h3>Pace</h3>
+            <input class="paceMinutes" type="tel" placeholder="MM" maxlength="2">
+            <span>:</span>
+            <input class="paceSeconds" type="tel" placeholder="SS" maxlength="2">
             <label class="speedText">/100 Meters</label>
-            <div class="clearRow">clear row</div>
+            <div class="clearRow">
+              <span aria-hidden="true" data-icon="x"></span>
+              <span class="screen-reader-text">clear row</span>
+            </div>
           </section>
-          <section class="time-section">
+          <section class="time-section row">
             <h3>Time</h3>
-            <input class="hours" type="tel" placeholder="Hours"></input>
-            <input class="minutes" type="tel" placeholder="Minutes" maxlength="2"></input>
-            <input class="seconds" type="tel" placeholder="Seconds" maxlength="2"></input>
-            <div class="clearRow">clear row</div>
+            <input class="hours" type="tel" placeholder="HH"></input>
+            <span>:</span>
+            <input class="minutes" type="tel" placeholder="MM" maxlength="2"></input>
+            <span>:</span>
+            <input class="seconds" type="tel" placeholder="SS" maxlength="2"></input>
+            <div class="clearRow">
+              <span aria-hidden="true" data-icon="x"></span>
+              <span class="screen-reader-text">clear row</span>
+            </div>
           </section>
-          <section class="distance-section">
+          <section class="distance-section row">
             <h3>Distance</h3>
             <input class="distance" type="tel" placeholder="Distance"></input>
             <select class="units">
               <option>Meters</option>
               <option>Yards</option>
             </select>
-            <div class="clearRow">clear row</div>
+            <div class="clearRow">
+              <span aria-hidden="true" data-icon="x"></span>
+              <span class="screen-reader-text">clear row</span>
+            </div>
           </section>
           <a class="calculate">Calculate</a>
         </form>
@@ -63,26 +84,38 @@
 
       <section id="bike" class="tab">
         <form id="calculateBike">
-          <section class="pace-section">
-            <input class="pace" type="text" value="">
+          <section class="pace-section row">
+            <h3>Pace</h3>
+            <input class="pace" type="text">
             <label class="speedText">mph</label>
-            <div class="clearRow">clear row</div>
+            <div class="clearRow">
+              <span aria-hidden="true" data-icon="x"></span>
+              <span class="screen-reader-text">clear row</span>
+            </div>
           </section>
-          <section class="time-section">
+          <section class="time-section row">
             <h3>Time</h3>
-            <input class="hours" type="tel" placeholder="Hours"></input>
-            <input class="minutes" type="tel" placeholder="Minutes" maxlength="2"></input>
-            <input class="seconds" type="tel" placeholder="Seconds" maxlength="2"></input>
-            <div class="clearRow">clear row</div>
+            <input class="hours" type="tel" placeholder="HH"></input>
+            <span>:</span>
+            <input class="minutes" type="tel" placeholder="MM" maxlength="2"></input>
+            <span>:</span>
+            <input class="seconds" type="tel" placeholder="SS" maxlength="2"></input>
+            <div class="clearRow">
+              <span aria-hidden="true" data-icon="x"></span>
+              <span class="screen-reader-text">clear row</span>
+            </div>
           </section>
-          <section class="distance-section">
+          <section class="distance-section row">
             <h3>Distance</h3>
             <input class="distance" type="tel" placeholder="Distance"></input>
             <select class="units">
               <option>Miles</option>
               <option>Kilometers</option>
             </select>
-            <div class="clearRow">clear row</div>
+            <div class="clearRow">
+              <span aria-hidden="true" data-icon="x"></span>
+              <span class="screen-reader-text">clear row</span>
+            </div>
           </section>
           <a class="calculate">Calculate</a>
         </form>
@@ -90,31 +123,40 @@
 
       <section id="run" class="tab">
         <form id="calculateRun">
-          <section class="pace-section">
-            <input class="paceMinutes" type="text" placeholder="Minutes" maxlength="2">
-            <input class="paceSeconds" type="text" placeholder="Seconds" maxlength="2">
+          <section class="pace-section row">
+            <h3>Pace</h3>
+              <input class="paceMinutes" type="text" placeholder="MM" maxlength="2">
+              <span>:</span>
+              <input class="paceSeconds" type="text" placeholder="SS" maxlength="2">
             <label class="speedText">Minutes/Mile</label>
-            <div class="clearRow">clear row</div>
+            <div class="clearRow">
+              <span aria-hidden="true" data-icon="x"></span>
+              <span class="screen-reader-text">clear row</span>
+            </div>
           </section>
-          <section class="time-section">
+          <section class="time-section row">
             <h3>Time</h3>
-            <input class="hours" type="tel" placeholder="Hours"></input>
-            <input class="minutes" type="tel" placeholder="Minutes" maxlength="2"></input>
-            <input class="seconds" type="tel" placeholder="Seconds" maxlength="2"></input>
-            <div class="clearRow">clear row</div>
+            <input class="hours" type="tel" placeholder="HH"></input>
+            <span>:</span>
+            <input class="minutes" type="tel" placeholder="MM" maxlength="2"></input>
+            <span>:</span>
+            <input class="seconds" type="tel" placeholder="SS" maxlength="2"></input>
+            <div class="clearRow">
+              <span aria-hidden="true" data-icon="x"></span>
+              <span class="screen-reader-text">clear row</span>
+            </div>
           </section>
-          <section class="distance-section">
+          <section class="distance-section row">
             <h3>Distance</h3>
             <input class="distance" type="tel" placeholder="Distance"></input>
             <select class="units">
               <option>Miles</option>
               <option>Kilometers</option>
-              <option>5K</option>
-              <option>10K</option>
-              <option>Half Marathon</option>
-              <option>Marathon</option>
             </select>
-            <div class="clearRow">clear row</div>
+            <div class="clearRow">
+              <span aria-hidden="true" data-icon="x"></span>
+              <span class="screen-reader-text">clear row</span>
+            </div>
           </section>
           <a class="calculate">Calculate</a>
         </form>

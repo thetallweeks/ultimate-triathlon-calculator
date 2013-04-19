@@ -8,6 +8,8 @@
        $(this).select();
     });
 
+    var calculated = 'set';
+
     // this create variables to reduce the number of times needed to fetch
     // these ids from the DOM
     var $swim = $('#swim');
@@ -45,6 +47,8 @@
       $('section.tab').addClass('hide');
       // Removes hide class on selected tab to show form
       $('section' + '#' + state).removeClass('hide');
+
+      calculated = 'set';
     }); // END hashchange function
     $(window).hashchange();
 
@@ -96,29 +100,10 @@
           $bike.find('.speedText').text('mph');
         }
       } else if (state === 'run') {
-        if ($run.find('.units').val() === 'Kilometers' || $run.find('.units').val() === 'Miles') {
-          $(this).enableInput();
-          $(this).parent().removeClass('ready');
-          standardDistance = false;
-        } else {
-          $(this).disableInput();
-          $(this).siblings('input').val('');
-          $(this).parent().addClass('ready');
-        }
-
         if ($run.find('.units').val() === 'Kilometers') {
           $run.find('.speedText').text('Min/Kilometer');
         } else {
-          $run.find('.speedText').text('Min/Mile');
-          if ($run.find('.units').val() === '5K') {
-            standardDistance = 3.1;
-          } else if ($run.find('.units').val() === '10K') {
-            standardDistance = 6.2
-          } else if ($run.find('.units').val() === 'Half Marathon') {
-            standardDistance = 13.1;
-          } else if ($run.find('.units').val() === 'Marathon') {
-            standardDistance = 26.2;
-          }   
+          $run.find('.speedText').text('Min/Mile');  
         } 
       }
     });
@@ -129,12 +114,13 @@
       // .add() adds siblings to jQuery object of current input
       // so I can evaluate all inputs at the same time
       $inputs = $(this).add($(this).siblings('input'));
-      $parent = $inputs.parent();
-      if ($inputs.val() !== '' && $inputs.val() > 0) {
-        $parent.addClass('ready');
-      } else {
-        $parent.removeClass('ready');
-      }
+      $(this).parent('.row').removeClass('ready');
+      $inputs.each(function() {
+        if ($(this).val() !== "" && $(this).val() > 0) {
+          $(this).parent('.row').addClass('ready');
+          return;
+        }
+      });      
 
       // Check if 2 of 3 parents have ready class
       $paceRow = $('#' + state).find('.pace-section');
@@ -143,7 +129,7 @@
 
       $paceRow.removeDisable();
       $timeRow.removeDisable();
-      $distanceRow.removeDisable();
+      $distanceRow.removeDisable();  
 
       if ($paceRow.hasClass('ready') && $timeRow.hasClass('ready')) {
         $distanceRow.addDisable();
@@ -152,17 +138,17 @@
       } else if ($timeRow.hasClass('ready') && $distanceRow.hasClass('ready')) {
         $paceRow.addDisable();
       }
-
     });
 
     // Clear row
     $('.clearRow').click(function() {
       $(this).siblings().val('');
-
+      $(this).siblings('select').change();
       // eq(0) gets first input
       // it is also a very fast way to select the first item
       $(this).siblings('input:eq(0)').keyup();
       // .keyup() will run all keyup events on the item
+      calculated = 'set'; // Resets calculated variable on clear
     });
 
     // Calculate function
@@ -172,14 +158,12 @@
       var seconds = $('#' + state).find('.seconds').val();
 
       // Checks if run distance is 
-      if (state === 'run' && standardDistance !== false) {
+      if (state === 'run' && standardDistance > 0) {
         var distance = standardDistance;
       } else {
         // if then shorthand (if) ? (then this) : (else this)
         var distance = parseFloat(($('#' + state).find('.distance').val() === '') ? (0) : ($('#' + state).find('.distance').val()));
       }
-
-      console.log(distance);
 
       if (state === 'swim' || state === 'run') {
         var paceMinutes = parseInt(($('#' + state).find('.paceMinutes').val() === '') ? (0) : ($('#' + state).find('.paceMinutes').val()));
@@ -191,7 +175,7 @@
       }
 
       // Check to see if Time is empty
-      if (hours === '' && minutes === '' && seconds === '') {
+      if (calculated === 'time' || (hours === '' && minutes === '' && seconds === '')) {
         // Check to see if distance and pace are greater than 0
         if (distance > 0 && pace > 0 || paceInSeconds > 0) {
           // If distance and pace > 0 calculates time
@@ -212,10 +196,12 @@
           $('#' + state).find('.hours').val(hours);
           $('#' + state).find('.minutes').val(minutes);
           $('#' + state).find('.seconds').val(seconds);
+
+          calculated = 'time';
         }
 
       // Check to see if distance is empty
-      } else if(!distance) {
+      } else if (calculated === 'distance' || !distance) {
           hours = parseInt((hours === '') ? (0) : (hours));
           minutes = parseInt((minutes === '') ? (0) : (minutes));
           seconds = parseInt((seconds === '') ? (0) : (seconds));
@@ -241,9 +227,11 @@
             }
             // Displays caluclated distance in distance field
             $('#' + state).find('.distance').val(distance);
+
+            calculated = 'distance';
           }
 
-        } else if (!pace) {
+        } else if (calculated === 'pace' || !pace) {
           hours = parseInt((hours === '') ? (0) : (hours));
           minutes = parseInt((minutes === '') ? (0) : (minutes));
           seconds = parseInt((seconds === '') ? (0) : (seconds));
@@ -265,9 +253,11 @@
               pace = (distance / (timeInSeconds / 3600)).toFixed(2);
               $('#' + state).find('.pace').val(pace);
             }
+
+            calculated = 'pace';
           }
         }
     });
-    
+
   });
 })(jQuery);

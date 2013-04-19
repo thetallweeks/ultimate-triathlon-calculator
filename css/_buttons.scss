@@ -1,0 +1,53 @@
+.calculate {
+    @include br(.25em);
+    display: block;
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 2em;
+    margin-top: 2em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+}
+
+.calculate,
+.calculate:hover,
+.calculate:visited { // 98
+    background: $primary; // 93
+    background: -webkit-gradient(linear, left top, left bottom, from($primary), to(darken($primary, 4%)));
+    background: -moz-linear-gradient(top,  $primary,  darken($primary, 4%));
+    border-bottom: .25em solid darken($primary, 23%);
+    box-shadow: inset .0625em .0625em 0 lighten($primary, 6%);
+    color: #fff; // 96
+    letter-spacing: .05em; // 70
+    text-shadow: 0 .1em 0 darken($primary, 30%);
+}
+
+.calculate:hover {
+    background: darken($primary, 4%);
+    background: -webkit-gradient(linear, left top, left bottom, from(darken($primary, 4%)), to($primary));
+    background: -moz-linear-gradient(top,  darken($primary, 4%),  $primary);
+}
+
+.calculate:before,
+.calculate:after {
+    border: .0625em solid darken($primary, 13%); //80
+    border-bottom: .0625em solid darken($primary, 28%);
+    bottom: -.0625em;
+    content: '';
+    height: 100%;
+    left: -.0625em;
+    position: absolute;
+    top: 0;
+    width: 100%; //65
+    @include br(.25em);
+}
+
+.calculate:before {
+    @include brall(0, 0, .25em, .25em);
+    border-top: 0;
+    bottom: -.25em;
+    -webkit-box-shadow: 0 .0625em .0625em 0px darken($primary, 18%); //75
+    -moz-box-shadow: 0 .0625em .0625em 0px darken($primary, 18%);
+    box-shadow: 0 .0625em .0625em 0px darken($primary, 18%);
+}
