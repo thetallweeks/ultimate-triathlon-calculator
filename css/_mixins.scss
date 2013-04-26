@@ -43,11 +43,6 @@
   :-ms-input-placeholder { color: $color; }
 }
 
-.sprite {
-  background-image: url(../img/icon-sprite.png);
-  background-repeat: no-repeat;
-}
-
 .transition {
   -webkit-transition: color .25s ease-in-out;
   -moz-transition: color .25s ease-in-out;

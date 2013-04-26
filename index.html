@@ -45,9 +45,9 @@
         <form id="calculateSwim">
           <section class="pace-section row">
             <h3>Pace</h3>
-            <input class="paceMinutes" type="tel" placeholder="MM" maxlength="2">
+            <input class="paceMinutes" type="number" step="1" placeholder="MM" maxlength="2">
             <span>:</span>
-            <input class="paceSeconds" type="tel" placeholder="SS" maxlength="2">
+            <input class="paceSeconds" type="number" step="1" placeholder="SS" maxlength="2">
             <label class="speedText">/100 Meters</label>
             <div class="clearRow">
               <span aria-hidden="true" data-icon="x"></span>
@@ -56,11 +56,11 @@
           </section>
           <section class="time-section row">
             <h3>Time</h3>
-            <input class="hours" type="tel" placeholder="HH"></input>
+            <input class="hours" type="number" step="1" placeholder="HH"></input>
             <span>:</span>
-            <input class="minutes" type="tel" placeholder="MM" maxlength="2"></input>
+            <input class="minutes" type="number" step="1" placeholder="MM" maxlength="2"></input>
             <span>:</span>
-            <input class="seconds" type="tel" placeholder="SS" maxlength="2"></input>
+            <input class="seconds" type="number" step="1" placeholder="SS" maxlength="2"></input>
             <div class="clearRow">
               <span aria-hidden="true" data-icon="x"></span>
               <span class="screen-reader-text">clear row</span>
@@ -68,7 +68,7 @@
           </section>
           <section class="distance-section row">
             <h3>Distance</h3>
-            <input class="distance" type="tel" placeholder="Distance"></input>
+            <input class="distance" type="number" step="0.01" placeholder="Distance"></input>
             <select class="units">
               <option>Meters</option>
               <option>Yards</option>
@@ -86,7 +86,7 @@
         <form id="calculateBike">
           <section class="pace-section row">
             <h3>Pace</h3>
-            <input class="pace" type="text">
+            <input class="pace" type="number" step="0.01">
             <label class="speedText">mph</label>
             <div class="clearRow">
               <span aria-hidden="true" data-icon="x"></span>
@@ -95,11 +95,11 @@
           </section>
           <section class="time-section row">
             <h3>Time</h3>
-            <input class="hours" type="tel" placeholder="HH"></input>
+            <input class="hours" type="number" step="1" placeholder="HH"></input>
             <span>:</span>
-            <input class="minutes" type="tel" placeholder="MM" maxlength="2"></input>
+            <input class="minutes" type="number" step="1" placeholder="MM" maxlength="2"></input>
             <span>:</span>
-            <input class="seconds" type="tel" placeholder="SS" maxlength="2"></input>
+            <input class="seconds" type="number" step="1" placeholder="SS" maxlength="2"></input>
             <div class="clearRow">
               <span aria-hidden="true" data-icon="x"></span>
               <span class="screen-reader-text">clear row</span>
@@ -107,7 +107,7 @@
           </section>
           <section class="distance-section row">
             <h3>Distance</h3>
-            <input class="distance" type="tel" placeholder="Distance"></input>
+            <input class="distance" type="number" step="0.01" placeholder="Distance"></input>
             <select class="units">
               <option>Miles</option>
               <option>Kilometers</option>
@@ -125,9 +125,9 @@
         <form id="calculateRun">
           <section class="pace-section row">
             <h3>Pace</h3>
-              <input class="paceMinutes" type="text" placeholder="MM" maxlength="2">
+              <input class="paceMinutes" type="number" step="1" placeholder="MM" maxlength="2">
               <span>:</span>
-              <input class="paceSeconds" type="text" placeholder="SS" maxlength="2">
+              <input class="paceSeconds" type="number" step="1" placeholder="SS" maxlength="2">
             <label class="speedText">Minutes/Mile</label>
             <div class="clearRow">
               <span aria-hidden="true" data-icon="x"></span>
@@ -136,11 +136,11 @@
           </section>
           <section class="time-section row">
             <h3>Time</h3>
-            <input class="hours" type="tel" placeholder="HH"></input>
+            <input class="hours" type="number" step="1" placeholder="HH"></input>
             <span>:</span>
-            <input class="minutes" type="tel" placeholder="MM" maxlength="2"></input>
+            <input class="minutes" type="number" step="1" placeholder="MM" maxlength="2"></input>
             <span>:</span>
-            <input class="seconds" type="tel" placeholder="SS" maxlength="2"></input>
+            <input class="seconds" type="number" step="1" placeholder="SS" maxlength="2"></input>
             <div class="clearRow">
               <span aria-hidden="true" data-icon="x"></span>
               <span class="screen-reader-text">clear row</span>
@@ -148,7 +148,7 @@
           </section>
           <section class="distance-section row">
             <h3>Distance</h3>
-            <input class="distance" type="tel" placeholder="Distance"></input>
+            <input class="distance" type="number" step="0.01" placeholder="Distance"></input>
             <select class="units">
               <option>Miles</option>
               <option>Kilometers</option>
@@ -167,8 +167,6 @@
     </div>
 
     <!-- Javascript -->
-    <script type="text/javascript" src="lib/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="lib/hash-change.js"></script>
-    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/functions-ck.js"></script>
   </body>
 </html>
