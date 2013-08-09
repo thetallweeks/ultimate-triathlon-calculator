@@ -1,0 +1,335 @@
+@import 'reset';
+
+/* -- Table of Contents -- */
+/*
+    1. Colors
+    2. Mixins
+    3. Icon Font
+    4. Buttons
+    5. General
+
+*/
+
+
+
+/* -- 1. Colors -- */
+$primary: #18E66A;
+$black: #000;
+$lightgray: lighten($black, 75%);
+$darkgray: lighten($black, 35%);
+
+
+
+/* -- 2. Mixins -- */
+@mixin gradient($from, $to, $fallback) {
+    background: $to;
+    background: url($fallback);
+    background: -moz-linear-gradient(top, $from 0%, $to 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to));
+    background: -webkit-linear-gradient(top, $from 0%,$to 100%);
+    background: -o-linear-gradient(top, $from 0%,$to 100%);
+    background: -ms-linear-gradient(top, $from 0%,$to 100%);
+    background: linear-gradient(to bottom, $from 0%,$to 100%);
+}
+
+@mixin br($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin brall($radius, $radius, $radius, $radius) {
+  -webkit-border-radius: $radius, $radius, $radius, $radius;
+  -moz-border-radius: $radius, $radius, $radius, $radius;
+  border-radius: $radius, $radius, $radius, $radius;
+}
+
+@mixin bs($x, $y, $blur, $color) {
+  -webkit-box-shadow: $x $y $blur $color;
+  -moz-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+
+.ir {
+  display: block;
+  height: 0;
+  line-height: 0;
+  text-indent: -9999px;
+}
+
+@mixin ph($color) {
+  ::-webkit-input-placeholder { color: $color; }
+  :-moz-placeholder { color: $color; }
+  ::-moz-placeholder { color: $color; }
+  :-ms-input-placeholder { color: $color; }
+}
+
+.transition {
+  -webkit-transition: color .25s ease-in-out;
+  -moz-transition: color .25s ease-in-out;
+  -o-transition: color .25s ease-in-out;
+  -ms-transition: color .25s ease-in-out;
+  transition: color .25s ease-in-out;
+}
+
+
+
+/* -- 3. Icon Font-- */
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot');
+    src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.woff') format('woff'),
+        url('../fonts/icomoon.ttf') format('truetype'),
+        url('../fonts/icomoon.svg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[data-icon]:before {
+    font-family: 'icomoon';
+    content: attr(data-icon);
+    speak: none;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+
+/* -- 4. Buttons -- */
+.calculate {
+    @include br(.25em);
+    display: block;
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 2em;
+    margin-top: 2em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+}
+
+.calculate,
+.calculate:hover,
+.calculate:visited { // 98
+    background: $primary; // 93
+    background: -webkit-gradient(linear, left top, left bottom, from($primary), to(darken($primary, 4%)));
+    background: -moz-linear-gradient(top,  $primary,  darken($primary, 4%));
+    border-bottom: .25em solid darken($primary, 23%);
+    box-shadow: inset .0625em .0625em 0 lighten($primary, 6%);
+    color: #fff; // 96
+    letter-spacing: .05em; // 70
+    text-shadow: 0 .1em 0 darken($primary, 30%);
+}
+
+.calculate:hover {
+    background: darken($primary, 4%);
+    background: -webkit-gradient(linear, left top, left bottom, from(darken($primary, 4%)), to($primary));
+    background: -moz-linear-gradient(top,  darken($primary, 4%),  $primary);
+}
+
+.calculate:before,
+.calculate:after {
+    border: .0625em solid darken($primary, 13%); //80
+    border-bottom: .0625em solid darken($primary, 28%);
+    bottom: -.0625em;
+    content: '';
+    height: 100%;
+    left: -.0625em;
+    position: absolute;
+    top: 0;
+    width: 100%; //65
+    @include br(.25em);
+}
+
+.calculate:before {
+    @include brall(0, 0, .25em, .25em);
+    border-top: 0;
+    bottom: -.25em;
+    -webkit-box-shadow: 0 .0625em .0625em 0px darken($primary, 18%); //75
+    -moz-box-shadow: 0 .0625em .0625em 0px darken($primary, 18%);
+    box-shadow: 0 .0625em .0625em 0px darken($primary, 18%);
+}
+
+
+
+/* -- 5. General -- */
+body {
+    background: url(../img/bg.png);
+    font-family: 'Titillium Web', Tahoma, 'Trebuchet MS', sans-serif;
+    font-size: 85%;
+    font-weight: 400;
+}
+
+@media screen and (min-width: 25em) {
+    body {
+        font-size: 100%;
+    }
+}
+
+@media screen and (min-width: 32em) {
+    body {
+        font-size: 115%;
+    }
+}
+
+#calculator-wrapper {
+    margin: 0 auto;
+    max-width: 32em;
+    padding: 1em;
+}
+
+
+/* Header */
+h1 img {
+    max-width: 100%;
+}
+
+
+/* Tabs */
+.tabs {
+    overflow: hidden;
+    margin: 1em auto;
+    width: 90%;
+}
+
+.swimTab,
+.bikeTab,
+.runTab {
+    color: $lightgray;
+    float: left;
+    font-size: 2.5em;
+    text-decoration: none;
+    text-align: center;
+    @extend .transition;
+    width: 33%;
+
+    &:hover {
+        @extend .transition;
+    }
+
+    &:hover,
+    &:active,
+    &.selected {
+        color: $darkgray;
+    }
+}
+
+.swimTab { margin-left: 0; }
+
+
+/* Form */
+h3 {
+    color: darken($primary, 10%);
+    font-size: 1.4em;
+    margin-bottom: .5em;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input,
+select {
+    @include br(.15em);
+    border: .0625em solid lighten($black, 65%);
+    font-size: 1.3em;
+    outline: none;
+    padding: .25em;
+}
+
+input {
+    background-color: transparent;
+    width: 1.5em;
+
+    &:disabled {
+        background-color: rgba($primary, .1);
+        border-color: darken($primary, 10%);
+    }
+}
+
+select {
+    border-color: #5c5c5c;
+    @include gradient(#e6e6e6, #ddd, #dfdfdf);
+    -webkit-appearance: none;
+    color: #5c5c5c;
+}
+
+.minutes,
+.paceMinutes {
+    width: 1.75em;
+}
+
+.pace { width: 4em; }
+.distance { width: 4.2em; }
+@include ph(rgba($black, 0.25));
+
+.row {
+    margin: 1em 0;
+    padding: 0 0 0 3em;
+    position: relative;
+
+    &:first-child {
+        margin-top: 1em;
+    }
+
+    &:before {
+        bottom: .25em;
+        content: "\3e";
+        color: lighten($lightgray, 8%);
+        font-family: "icomoon";
+        font-size: 1.75em;
+        width: 1em;
+        height: 1em;
+        left: 0;
+        position: absolute;
+    }
+}
+
+.ready:before { content: "\5e"; }
+.ready:before,
+.disabled:before
+{ color: lighten($darkgray, 15%); }
+
+.clearRow {
+    bottom: .5em;
+    color: $lightgray;
+    cursor: pointer;
+    font-size: 1.25em;
+    height: 1em;
+    position: absolute;
+    right: .25em;
+    @extend .transition;
+    width: 1em;
+
+    &:hover {
+        color: $darkgray;
+        @extend .transition;
+    }
+}
+
+a { cursor: pointer; }
+
+.selected {
+
+}
+
+
+/* -- Generic Classes -- */
+.clear:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.hide { display: none; }
+.screen-reader-text { @extend .ir; }
